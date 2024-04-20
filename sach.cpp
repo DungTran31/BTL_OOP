@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+#include <vector>
 using namespace std;
 
 class Sach {
@@ -21,6 +22,10 @@ public:
         this->maTacGia = maTacGia;
     }
 
+	void setSoLuong(int amount){
+		this->soLuong += amount;
+	}
+	
     string getMaSach() { return maSach; }
     string getTenSach() { return tenSach; }
     string getMaKho() { return maKho; }
@@ -44,3 +49,4 @@ public:
         cout << maSach << " " << tenSach << " " << maKho << " " << soLuong << " " << namXuatBan << " " << maLoaiSach << " " << maTacGia << endl;
     }
 };
+

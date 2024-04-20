@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+#include <vector>
 using namespace std;
 
 class PhieuMuon {
@@ -27,13 +28,23 @@ public:
     void addSachMuon(string maSach) {
         danhSachSachMuon.push_back(maSach);
     }
+    
+    void setDanhSachMuon(vector<string> listSachMuon){
+    	this->danhSachSachMuon = listSachMuon;
+	}
 
     void nhap() {
         cout << "Nhap ma phieu muon: "; getline(cin, maPhieuMuon);
         cout << "Nhap ma thu thu: "; getline(cin, maThuThu);
         cout << "Nhap ma sinh vien: "; getline(cin, maSinhVien);
         cout << "Nhap ngay muon: "; getline(cin, ngayMuon);
-        bool check = true;
+        cout << "Nhap so sach muon muon: "; int numberOfBooks; cin >> numberOfBooks; cin.ignore();
+        string maSach;
+		for(int i = 0; i < numberOfBooks; i++){
+        	cout << "Nhap ma sach thu " << i+1; getline(cin, maSach);
+			danhSachSachMuon.push_back(maSach);
+		}
+		bool check = true;        
         while (check) {
             cout << "Nhap ngay tra: "; getline(cin, ngayTra);
             if(ngayTra > ngayMuon) {
@@ -55,3 +66,4 @@ public:
         }
     }
 };
+

@@ -29,6 +29,7 @@ int main() {
     ThuThu thuthu;
     cout << "Nhap thong tin thu thu:\n";
     thuthu.nhap();
+    cout << "Thong tin cua thu thu:\n";
     thuthu.xuat();
     
     cout << "Nhap so luong sach trong thu vien: ";
