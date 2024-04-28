@@ -19,7 +19,6 @@ bool actionWithLastChoice(){
 }
 
 bool actionWithThuThu(){
-	system("CLS");
 	cout << "1. Them thu thu" << endl;
 	cout << "2. Xoa thu thu" << endl;
 	cout << "3. Danh sach thu thu" << endl;
@@ -39,7 +38,6 @@ bool actionWithThuThu(){
 }
 
 bool actionWithSinhVien(){
-	system("CLS");
 	cout << "Chon thao tac: " << endl;
 	cout << "1. Them sinh vien" << endl;
 	cout << "2. Xoa sinh vien" << endl;
@@ -66,7 +64,6 @@ bool actionWithSinhVien(){
 
 
 bool actionWithSach(){
-	system("CLS");
 	cout << "Chon thao tac: " << endl;
 	cout << "1. Them sach" << endl;
 	cout << "2. Xoa sach" << endl;
@@ -91,7 +88,6 @@ bool actionWithSach(){
 
 
 bool actionWithTacGia(){
-	system("CLS");
 	cout << "1. Them tac gia" << endl;
 	cout << "2. Xoa tac gia" << endl;
 	cout << "3. Danh sach tac gia" << endl;
@@ -112,7 +108,6 @@ bool actionWithTacGia(){
 
 
 bool actionWithTraMuonSach(){
-	system("CLS");
 	cout << "1. Them phieu muon" << endl;
 	cout << "2. Xoa phieu muon" << endl;
 	cout << "3. Danh sach phieu muon" << endl;
@@ -137,7 +132,6 @@ bool actionWithTraMuonSach(){
 
 
 void printChoices(){
-	system("CLS");
 	cout << "1. Thu Thu" << endl;
 	cout << "2. Sinh Vien" << endl;
 	cout << "3. Sach" << endl;
