@@ -54,9 +54,21 @@ class QuanLySachVaTacGia{
 	
 	
 public:
+    vector<Sach> getListSach() {
+        return listSach;
+    }
+	vector<LoaiSach> getListLoaiSach(){
+        return listLoaiSach;
+    }
+
 	void getBooksDataFromFile(string filePath){
 		fstream file;
 		file.open(filePath, ios::in);
+		
+		if (!file.is_open()) {
+			cout << "Failed to open file!" << endl;
+			return;
+		}
 		
 		string strNumberOfBooks;
 		getline(file, strNumberOfBooks);
@@ -82,10 +94,15 @@ public:
 		
 		file.close();
 	}
-	
+
 	void getAuthorDataFromFile(string filePath){
 		fstream file;
 		file.open(filePath, ios::in);
+		
+		if (!file.is_open()) {
+			cout << "Failed to open file!" << endl;
+			return;
+		}
 		
 		string strNumberOfAuthors;
 		getline(file, strNumberOfAuthors);
@@ -103,10 +120,15 @@ public:
 		}
 		file.close();
 	}
+
 	
 	void writeBooksDataToFile(string filePath){
 		fstream file;
 		file.open(filePath, ios::out);
+		if (!file.is_open()) {
+			cout << "Failed to open file!" << endl;
+			return;
+		}
 		file << listSach.size() << endl;
 		for(int i = 0; i < listSach.size(); i++){
 			Sach s = listSach.at(i);
@@ -120,10 +142,14 @@ public:
 		}
 		file.close();
 	}
-	
+
 	void writeAuthorsDataToFile(string filePath){
 		fstream file;
 		file.open(filePath, ios::out);
+		if (!file.is_open()) {
+			cout << "Failed to open file!" << endl;
+			return;
+		}
 		file << listTacGia.size() << endl;
 		for(TacGia tg: listTacGia){
 			file << tg.getMaTacGia() << endl;

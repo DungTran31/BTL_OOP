@@ -1,5 +1,4 @@
 #include <bits/stdc++.h>
-#include <vector>
 using namespace std;
 
 class Sach {
@@ -49,4 +48,3 @@ public:
         cout << maSach << " " << tenSach << " " << maKho << " " << soLuong << " " << namXuatBan << " " << maLoaiSach << " " << maTacGia << endl;
     }
 };
-

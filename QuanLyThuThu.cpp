@@ -27,6 +27,10 @@ public:
 	void getThuThuDataFromFile(string filePath){
 		fstream file;
 		file.open(filePath, ios::in);
+		if (!file.is_open()) {
+			cout << "Failed to open file!" << endl;
+			return;
+		}
 		
 		string sNumberOfTT;
 		getline(file, sNumberOfTT);
@@ -39,16 +43,20 @@ public:
 			getline(file, maTT);
 			getline(file, tenTT);
 			getline(file, sdtTT);
-			ThuThu sv(maTT, tenTT, sdtTT);
-			listThuThu.push_back(sv);
+			ThuThu tt(maTT, tenTT, sdtTT);
+			listThuThu.push_back(tt);
 		}
 		
 		file.close();
-	}	
-	
+	}
+
 	void writeThuThuDataToFile(string filePath){
 		fstream file;
 		file.open(filePath, ios::out);
+		if (!file.is_open()) {
+			cout << "Failed to open file!" << endl;
+			return;
+		}
 		
 		file << listThuThu.size() << endl;
 		
@@ -59,12 +67,14 @@ public:
 		}
 		
 		file.close();
-	}	
+	}
+
 	
 	
 	void themThuThu(){
 		ThuThu tt;
 		tt.nhap();
+		
 		if(!isInListThuThu(tt.getMaThuThu())){
 			listThuThu.push_back(tt);
 			cout << "Them thu thu thanh cong" << endl;

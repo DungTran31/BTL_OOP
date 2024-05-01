@@ -41,11 +41,19 @@ public:
 		writeSinhVienDataToFile("inputSinhVien.txt");
 		writePhieuMuonDataToFile("inputPhieuMuon.txt");
 	}
+
 	
+    vector<PhieuMuon> getListPhieuMuon() {
+        return listPhieuMuon;
+    }
 	
 	void getSinhVienDataFromFile(string filePath){
 		fstream file;
 		file.open(filePath, ios::in);
+		if (!file.is_open()) {
+			cout << "Failed to open file!" << endl;
+			return;
+		}
 		
 		string sNumberOfStudent;
 		getline(file, sNumberOfStudent);
@@ -64,10 +72,14 @@ public:
 		
 		file.close();
 	}
-	
+
 	void writeSinhVienDataToFile(string filePath){
 		fstream file;
 		file.open(filePath, ios::out);
+		if (!file.is_open()) {
+			cout << "Failed to open file!" << endl;
+			return;
+		}
 		
 		file << listSinhVien.size() << endl;
 		
@@ -79,10 +91,14 @@ public:
 		
 		file.close();
 	}
-	
+
 	void getPhieuMuonDataFromFile(string filePath){
 		fstream file;
 		file.open(filePath, ios::in);
+		if (!file.is_open()) {
+			cout << "Failed to open file!" << endl;
+			return;
+		}
 		
 		string sNumberOfPhieuMuon;
 		getline(file, sNumberOfPhieuMuon);
@@ -115,10 +131,15 @@ public:
 		}
 		file.close();
 	}
-	
+
 	void writePhieuMuonDataToFile(string filePath){
 		fstream file;
 		file.open(filePath, ios::out);
+		if (!file.is_open()) {
+			cout << "Failed to open file!" << endl;
+			return;
+		}
+		
 		file << listPhieuMuon.size() << endl;
 		for(PhieuMuon pm: listPhieuMuon){
 			file << pm.getMaPhieuMuon() << endl;
@@ -131,6 +152,7 @@ public:
 			}
 			file << "end" << endl;
 		}
+		
 		file.close();
 	}
 
