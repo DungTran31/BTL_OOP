@@ -8,28 +8,10 @@
 using namespace std;
 
 class QuanLySinhVienMuonSach{
-	vector<SinhVien> listSinhVien;
-	vector<PhieuMuon> listPhieuMuon;
-	
-	bool isInListSinhVien(string msv){
-		for(SinhVien s: listSinhVien){
-			if(s.getMaSinhVien() == msv){
-				return true;
-			}
-		}
-		return false;
-	}
-	bool isInListPhieuMuon(string mpm){
-		for(PhieuMuon s: listPhieuMuon){
-			if(s.getMaPhieuMuon() == mpm){
-				return true;
-			}
-		}
-		return false;
-	}
-	
-	
 public:
+	vector<SinhVien> listSinhVien;
+	vector<PhieuMuon> listPhieuMuon;	
+	
 	QuanLySinhVienMuonSach(){
 		//read data
 		getSinhVienDataFromFile("inputSinhVien.txt");
@@ -41,7 +23,48 @@ public:
 		writeSinhVienDataToFile("inputSinhVien.txt");
 		writePhieuMuonDataToFile("inputPhieuMuon.txt");
 	}
-
+	
+	
+	//Check is in lists
+	bool isInListSinhVien(string msv){
+		for(SinhVien s: listSinhVien){
+			if(s.getMaSinhVien() == msv){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	bool isInListPhieuMuon(string mpm){
+		for(PhieuMuon s: listPhieuMuon){
+			if(s.getMaPhieuMuon() == mpm){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	//print lists
+	void printListSinhVien(){
+		for(SinhVien s: listSinhVien){
+			s.xuat();
+		}
+	}
+	
+	void printListPhieuMuon(){
+		for(PhieuMuon pm: listPhieuMuon){
+			pm.xuat();
+		}
+	}
+	
+	void printListMaSinhVien(){
+		for(SinhVien s: listSinhVien){
+			cout << s.getMaSinhVien() << " ";
+		}
+		cout << endl;
+	}
+	
+	// get
 	
     vector<PhieuMuon> getListPhieuMuon() {
         return listPhieuMuon;
@@ -72,7 +95,46 @@ public:
 		
 		file.close();
 	}
-
+	
+	void getPhieuMuonDataFromFile(string filePath){
+		fstream file;
+		file.open(filePath, ios::in);
+		if (!file.is_open()) {
+			cout << "Failed to open file!" << endl;
+			return;
+		}
+		
+		string sNumberOfPhieuMuon;
+		getline(file, sNumberOfPhieuMuon);
+		int numberOfPhieuMuon = stoi(sNumberOfPhieuMuon);
+		
+		for(int i = 0; i < numberOfPhieuMuon; i++){
+			string maPhieuMuon;
+			string maThuThu;
+			string maSinhVien;
+			string ngayMuon;
+			string elemSach;
+			getline(file, maPhieuMuon);
+			getline(file, maThuThu);
+			getline(file, maSinhVien);
+			getline(file, ngayMuon);
+			vector<string> listSachMuon;
+			while(true){
+				file >> elemSach;
+				if(elemSach == "end"){
+					break;
+				}
+				listSachMuon.push_back(elemSach);
+			}
+			PhieuMuon pm(maPhieuMuon, maThuThu, maSinhVien, ngayMuon);
+			pm.setDanhSachMuon(listSachMuon);
+			listPhieuMuon.push_back(pm);
+			file.ignore();
+		}
+		file.close();
+	}
+	
+	//write
 	void writeSinhVienDataToFile(string filePath){
 		fstream file;
 		file.open(filePath, ios::out);
@@ -92,46 +154,6 @@ public:
 		file.close();
 	}
 
-	void getPhieuMuonDataFromFile(string filePath){
-		fstream file;
-		file.open(filePath, ios::in);
-		if (!file.is_open()) {
-			cout << "Failed to open file!" << endl;
-			return;
-		}
-		
-		string sNumberOfPhieuMuon;
-		getline(file, sNumberOfPhieuMuon);
-		int numberOfPhieuMuon = stoi(sNumberOfPhieuMuon);
-		
-		for(int i = 0; i < numberOfPhieuMuon; i++){
-			string maPhieuMuon;
-			string maThuThu;
-			string maSinhVien;
-			string ngayMuon;
-			string ngayTra;
-			string elemSach;
-			getline(file, maPhieuMuon);
-			getline(file, maThuThu);
-			getline(file, maSinhVien);
-			getline(file, ngayMuon);
-			getline(file, ngayTra);
-			vector<string> listSachMuon;
-			while(true){
-				file >> elemSach;
-				if(elemSach == "end"){
-					break;
-				}
-				listSachMuon.push_back(elemSach);
-			}
-			PhieuMuon pm(maPhieuMuon, maThuThu, maSinhVien, ngayMuon, ngayTra);
-			pm.setDanhSachMuon(listSachMuon);
-			listPhieuMuon.push_back(pm);
-			file.ignore();
-		}
-		file.close();
-	}
-
 	void writePhieuMuonDataToFile(string filePath){
 		fstream file;
 		file.open(filePath, ios::out);
@@ -146,7 +168,6 @@ public:
 			file << pm.getMaThuThu() << endl;
 			file << pm.getMaSinhVien() << endl;
 			file << pm.getNgayMuon() << endl;
-			file << pm.getNgayTra() << endl;
 			for(string ma: pm.getDanhSachSachMuon()){
 				file << ma << " ";
 			}
@@ -155,6 +176,9 @@ public:
 		
 		file.close();
 	}
+
+	
+	//them
 
 	void themSinhVien(){
 		SinhVien sv;
@@ -166,6 +190,8 @@ public:
 			cout << "Ma sinh vien da ton tai" << endl;
 		}
 	}
+	
+	//xoa
 	
 	void xoaSinhVien(){
 		cout << "Nhap ma sinh vien muon xoa: " << endl;
@@ -184,25 +210,8 @@ public:
 		}
 	}
 	
-	void printListSinhVien(){
-		for(SinhVien s: listSinhVien){
-			s.xuat();
-		}
-	}
-	
-	void themPhieuMuon(){
-		PhieuMuon pm;
-		pm.nhap();
-		if(!isInListPhieuMuon(pm.getMaPhieuMuon())){
-			listPhieuMuon.push_back(pm);
-			cout << "Them phieu muon thanh cong" << endl;
-		} else{
-			cout << "Ma phieu muon da ton tai" << endl;
-		}
-	}
-	
 	void xoaPhieuMuon(){
-		cout << "Nhap ma phieu muuon muon xoa: " << endl;
+		cout << "Nhap ma phieu muon muon xoa: " << endl;
 		string maPhieuMuon;
 		getline(cin, maPhieuMuon);
 		if(!isInListPhieuMuon(maPhieuMuon)){
@@ -217,13 +226,9 @@ public:
 			}
 		}
 	}
-	
-	
-	void printListPhieuMuon(){
-		for(PhieuMuon pm: listPhieuMuon){
-			pm.xuat();
-		}
-	}
+
+
+	// thong tin
 	
 	void thongTinPhieuMuon(){
 		string maPhieuMuon;

@@ -2,14 +2,14 @@
 sach001
 Tay Du Ky
 1
-20
+17
 1998
 1
 tg001
 sach002
 The Art of Game Design
 2
-10
+7
 2012
 6
 tg005
