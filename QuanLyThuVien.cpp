@@ -3,11 +3,11 @@
 #include "QuanLySachVaTacGia.cpp"
 #include "QuanLyThuThu.cpp"
 #include "QuanLySinhVienMuonSach.cpp"
-#include "QuanLySinhVienTraSach.cpp"
 #include "QuanLyCauTruyVan.cpp"
 
+
 using namespace std;
-class QuanLyThuVien : public QuanLySachVaTacGia, public QuanLySinhVienMuonSach, public QuanLyThuThu, public QuanLyCauTruyVan, public QuanLySinhVienTraSach {
+class QuanLyThuVien : public QuanLySachVaTacGia, public QuanLySinhVienMuonSach, public QuanLyThuThu, public QuanLyCauTruyVan{
 public:
 	
 	// check ngay muon
@@ -105,6 +105,96 @@ public:
 		} else{
 			cout << "Ma phieu muon da ton tai" << endl;
 		}
+	}
+	
+	
+	void themPhieuTra(){
+		string maPhieuTra = "pt";
+		if(listPhieuTra.size() < 9){
+			maPhieuTra += "00";
+			maPhieuTra += to_string(listPhieuTra.size()+1);
+		} else if(listPhieuTra.size() < 99){
+			maPhieuTra += "0";
+			maPhieuTra += to_string(listPhieuTra.size()+1);
+		} else{
+			maPhieuTra += to_string(listPhieuTra.size()+1);
+		}
+		
+		// nhap ma thu thu
+		string maThuThu;
+		cout << "Nhap ma thu thu phu trach: " << endl;
+		getline(cin, maThuThu);
+		
+		while(!isInListThuThu(maThuThu)){
+			cout << "Ma thu thu khong ton tai trong he thong!" << endl;
+			cout << "Hien dang co cac ma thu thu sau: " << endl;
+			printListMaThuThu();
+			cout << "Nhap lai ma thu thu phu trach: " << endl;
+			getline(cin, maThuThu);
+		}
+		
+		// nhap ma phieu muon
+		string maPhieuMuon;
+		cout << "Nhap ma phieu muon: " << endl;
+		getline(cin, maPhieuMuon);
+		
+		while(!isInListPhieuMuon(maPhieuMuon)){
+			cout << "Ma phieu muon khong ton tai trong he thong!" << endl;
+			cout << "Hien dang co cac ma phieu muon sau: " << endl;
+			printListMaPhieuMuon();
+			cout << "Nhap lai ma phieu muon: " << endl;
+			getline(cin, maPhieuMuon);
+		}
+		PhieuMuon pm = getPhieuMuonByMa(maPhieuMuon);
+		
+		string ngayTra;
+		cout << "Nhap ngay tra sach: " << endl;
+		getline(cin, ngayTra);
+		
+		while(!isValidDate(ngayTra) || ngayTra < pm.getNgayMuon()){
+			cout << "Ngay tra som hon ngay muon hoac dinh dang ngay tra khong dung (dd/mm/yyyy)!!" << endl;
+			cout << "Nhap lai ngay tra sach: " << endl;	
+			getline(cin, ngayTra);
+		}
+		
+		PhieuTra pt(maPhieuTra, maThuThu, pm.getMaSinhVien(), ngayTra);
+		
+		cout << "So sach tra: ";
+		int soSachTra;
+		cin >> soSachTra;
+		while(soSachTra > pm.getSoSachmuon()){
+			cout << "So sach tra vuot qua so sach muon" << endl;
+			cout << "Nhap lai so sach tra: " << endl;
+			cin >> soSachTra;
+		}
+		cin.ignore();
+		
+		vector<string> danhSachSachTra;
+		cout << "Cac ma sach phai tra: ";
+		pm.printListMaSachMuon();
+		string maSachTra;
+		for(int i = 0; i < soSachTra; i++){
+			cout << "Nhap ma sach tra thu " << i+1 << ": ";
+			getline(cin, maSachTra);
+			
+			while(!pm.isInListSachMuon(maSachTra)){
+				cout << "Ma sach muon tra khong hop le" << endl;
+				cout << "Cac ma sach da muon: " << endl;
+				pm.printListMaSachMuon();
+				cout << "Nhap lai ma sach tra thu " << i+1 << ": ";
+				getline(cin, maSachTra);
+			}
+			
+			tangSoLuongSach(maSachTra);
+			danhSachSachTra.push_back(maSachTra);
+		}
+		
+		pt.setDanhSachTra(danhSachSachTra);
+		
+		pt.phatNeuThieuSach(pm.getDanhSachSachMuon());
+		pt.phatNeuQuaHan(pm);
+		
+		listPhieuTra.push_back(pt);
 	}
 };
 

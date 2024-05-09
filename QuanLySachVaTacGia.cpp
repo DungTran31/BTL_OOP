@@ -418,6 +418,15 @@ public:
 		}
 	}
 	
+	void tangSoLuongSach(string maSach){	
+		for(int i = 0; i < listSach.size(); i++){
+			if(listSach.at(i).getMaSach() == maSach){
+				listSach.at(i).setSoLuong(1);
+				return;
+			}
+		}
+	}
+	
 	// tim kiem
 	
 	void searchBookInfo(){

@@ -1,6 +1,8 @@
 #include <bits/stdc++.h>
 #include "phieumuon.cpp"
+#pragma once
 using namespace std;
+
 
 class PhieuTra {
 private:
@@ -55,7 +57,6 @@ public:
         int returnDay = stoi(ngayTra.substr(0, 2));
         int returnMonth = stoi(ngayTra.substr(3, 2));
         int returnYear = stoi(ngayTra.substr(6, 4));
-
         // Tính số ngày từ ngày mượn sách đến ngày trả sách
         int days = (returnYear - borrowYear) * 365 + (returnMonth - borrowMonth) * 30 + (returnDay - borrowDay);
 
@@ -77,7 +78,7 @@ public:
             cout << "Ban da tra thieu " << soSachThieu << " cuon sach." << endl;
             
             int phatTien = soSachThieu * 50000; // Giả sử phạt 50000 VND cho mỗi cuốn sách thiếu
-            cout << "So tien phat: " << phatTien << " VND." << endl;
+            cout << "So tien phat vi tra thieu sach: " << phatTien << " VND." << endl;
         }
     }
     
@@ -100,7 +101,7 @@ public:
     void xuat() {
         cout << maPhieuTra << " " << maThuThu << " " << maSinhVien << " " << ngayTra << " " << endl;
         if(danhSachSachTra.size() > 0) {
-            cout << "Danh sach ma sach dc muon trong phieu co ma " << maPhieuTra << ":\n";
+            cout << "Danh sach ma sach dc tra trong phieu co ma " << maPhieuTra << ":\n";
             for(auto x : danhSachSachTra) {
                 cout << x << " ";
             }

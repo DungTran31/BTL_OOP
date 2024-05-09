@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
 #include <vector>
+#pragma once
 using namespace std;
 
 class PhieuMuon {
@@ -21,7 +22,26 @@ public:
     string getMaSinhVien() { return maSinhVien; }
     string getNgayMuon() { return ngayMuon; }
     vector<string> getDanhSachSachMuon() { return danhSachSachMuon; }
-
+    
+    void printListMaSachMuon(){
+    	for(string maSachMuon: danhSachSachMuon){
+    		cout << maSachMuon << " ";
+		}
+		cout << endl;
+	}
+	
+	bool isInListSachMuon(string maSach){
+		for(Sach s: danhSachSachMuon){
+			if(s.getMaSach() == maSach){
+				return true;
+			}
+		}
+		return false;
+	}
+    
+	int getSoSachmuon(){
+		return danhSachSachMuon.size();
+	}
 
     void addSachMuon(string maSach) {
         danhSachSachMuon.push_back(maSach);

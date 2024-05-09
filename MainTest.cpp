@@ -115,7 +115,8 @@ bool actionWithTraMuonSach(){
 	cout << "2. Xoa phieu muon" << endl;
 	cout << "3. Danh sach phieu muon" << endl;
 	cout << "4. Thong tin chi tiet phieu muon" << endl;
-	cout << "5. Quay Lai" << endl;
+	cout << "5. Tra sach" << endl;
+	cout << "6. Quay Lai" << endl;
 	cout << "Chon thao tac: ";
 	int choice; cin >> choice; cin.ignore();
 	if(choice == 1){
@@ -127,6 +128,8 @@ bool actionWithTraMuonSach(){
 	} else if(choice == 4){
 		qltv.thongTinPhieuMuon();
 	} else if(choice == 5){
+		qltv.themPhieuTra();
+	} else if(choice == 6){
 		return false;
 	}
 	return actionWithLastChoice();
