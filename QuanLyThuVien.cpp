@@ -3,10 +3,11 @@
 #include "QuanLySachVaTacGia.cpp"
 #include "QuanLyThuThu.cpp"
 #include "QuanLySinhVienMuonSach.cpp"
+#include "QuanLySinhVienTraSach.cpp"
 #include "QuanLyCauTruyVan.cpp"
 
 using namespace std;
-class QuanLyThuVien : public QuanLySachVaTacGia, public QuanLySinhVienMuonSach, public QuanLyThuThu, public QuanLyCauTruyVan{
+class QuanLyThuVien : public QuanLySachVaTacGia, public QuanLySinhVienMuonSach, public QuanLyThuThu, public QuanLyCauTruyVan, public QuanLySinhVienTraSach {
 public:
 	
 	// check ngay muon
